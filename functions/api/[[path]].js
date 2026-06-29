@@ -85,6 +85,7 @@ function ghHeaders(token) {
     };
     if (token) h["Authorization"] = "Bearer " + token;
     return h;
+}
 async function listGitHubFiles(cfg) {
     const url = `${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/uploads?ref=${cfg.branch}`;
     const res = await fetch(url, { headers: ghHeaders(cfg.token) });
