@@ -81,11 +81,10 @@ function getFileType(name) {
 function ghHeaders(token) {
     const h = {
         Accept: "application/vnd.github.v3+json",
+        "User-Agent": "XyloHost/2.0",
     };
     if (token) h["Authorization"] = "Bearer " + token;
     return h;
-}
-
 async function listGitHubFiles(cfg) {
     const url = `${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/uploads?ref=${cfg.branch}`;
     const res = await fetch(url, { headers: ghHeaders(cfg.token) });
@@ -308,6 +307,7 @@ export async function onRequest(context) {
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
 
 
 
