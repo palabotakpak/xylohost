@@ -16,8 +16,8 @@ export default function HomePage() {
       <main>
         {/* Hero */}
         <section className="relative bg-black min-h-screen md:min-h-0 pt-[160px] pb-[100px] md:pt-[180px] md:pb-[140px] flex flex-col items-center justify-center overflow-hidden">
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[650px] h-[350px] md:h-[650px] rounded-full pointer-events-none z-0 opacity-40 select-none" 
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[650px] h-[350px] md:h-[650px] rounded-full pointer-events-none z-0 opacity-40 select-none"
             style={{
               background: "radial-gradient(circle, rgba(255, 192, 0, 0.12) 0%, rgba(255, 192, 0, 0) 70%)",
               filter: "blur(50px)"
@@ -27,7 +27,7 @@ export default function HomePage() {
           <div className="relative z-10 max-w-[800px] mx-auto px-4 md:px-8 w-full flex flex-col items-center text-center">
             <div className="max-w-[680px] sm:max-w-full w-full mb-6 flex flex-col items-center">
               <h1 className="font-brand text-[clamp(24px,5.5vw,32px)] md:text-[clamp(32px,4.8vw,52px)] leading-[1.2] font-black tracking-tight text-white mb-10 md:mb-6 uppercase">
-                Hosting <span className="bg-gradient-to-r from-gold-text via-gold to-yellow-500 bg-clip-text text-transparent">Apapun</span><br className="hidden sm:block" /> Instan
+                Hosting <span className="bg-gradient-to-r from-gold-text via-gold to-yellow-500 bg-clip-text text-transparent">Apapun</span><br className="hidden sm:block" /> Gratis
               </h1>
               <p className="font-display text-base md:text-[17.5px] leading-relaxed md:leading-[1.65] text-ash mb-[52px] md:mb-9">
                 Seret dan lepaskan file apa pun.
