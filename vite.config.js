@@ -79,6 +79,7 @@ export default defineConfig(({ mode }) => {
                     method: "PUT",
                     headers: {
                       Authorization: "Bearer " + (env.VITE_GITHUB_TOKEN || ""),
+                      "User-Agent": "XyloHost/2.0",
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
@@ -158,3 +159,4 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
+
