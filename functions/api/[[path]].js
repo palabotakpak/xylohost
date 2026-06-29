@@ -283,11 +283,23 @@ export async function onRequest(context) {
 
     // ── GET /api/ping ── Diagnostic ─────────────────
     if (method === "GET" && path === "ping") {
+        let ghStatus = "untested";
+        let ghBody = "";
+        try {
+            const testUrl = `${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}`;
+            const testRes = await fetch(testUrl, { headers: ghHeaders(cfg.token) });
+            ghStatus = testRes.status;
+            ghBody = (await testRes.text()).slice(0, 200);
+        } catch (e) {
+            ghStatus = "error: " + e.message;
+        }
         return json({
             success: true,
             data: {
                 ok: true,
                 hasToken: !!cfg.token,
+                ghStatus,
+                ghResponse: ghBody,
                 owner: cfg.owner,
                 repo: cfg.repo,
             },
@@ -296,6 +308,7 @@ export async function onRequest(context) {
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
 
 
 
