@@ -1,6 +1,8 @@
-const OWNER = "palabotakpak";
-const REPO = "cdn";
-const BRANCH = "main";
+const FALLBACK = {
+  owner: "palabotakpak",
+  repo: "cdn",
+  branch: "main",
+};
 
 const PREVIEWABLE = new Set([
   "jpg","jpeg","png","gif","webp","svg","bmp","ico","avif",
@@ -24,7 +26,7 @@ const MIME_TYPES = {
 };
 
 export async function onRequest(context) {
-  const { request, next } = context;
+  const { request, next, env } = context;
   const url = new URL(request.url);
   let path = url.pathname.replace(/^\//, "");
 
@@ -41,13 +43,26 @@ export async function onRequest(context) {
   const ext = path.split(".").pop().toLowerCase();
   if (!/^[a-z0-9]{2,5}$/.test(ext)) return next();
 
-  const cdnUrl = "https://cdn.jsdelivr.net/gh/" + OWNER + "/" + REPO + "@" + BRANCH + "/" + path;
-  const rawUrl = "https://raw.githubusercontent.com/" + OWNER + "/" + REPO + "/" + BRANCH + "/" + path;
+  const owner = env.GITHUB_OWNER || FALLBACK.owner;
+  const repo = env.GITHUB_REPO || FALLBACK.repo;
+  const branch = env.GITHUB_BRANCH || FALLBACK.branch;
+
+  const cdnUrl = "https://cdn.jsdelivr.net/gh/" + owner + "/" + repo + "@" + branch + "/" + path;
+  const rawUrl = "https://raw.githubusercontent.com/" + owner + "/" + repo + "/" + branch + "/" + path;
 
   try {
     let response = await fetch(rawUrl);
-    if (!response.ok) response = await fetch(cdnUrl);
-    if (!response.ok) return next();
+    if (!response.ok) {
+      response = await fetch(cdnUrl);
+    }
+    if (!response.ok) {
+      // If we got a 404/error from both, returning a clear error instead of next()
+      // so we can see what's wrong instead of getting a blank React page.
+      return new Response(`File not found or unreachable on GitHub. Status: ${response.status}. URLs tried: Raw=[${rawUrl}], CDN=[${cdnUrl}]`, {
+        status: 404,
+        headers: { "Content-Type": "text/plain" }
+      });
+    }
 
     const data = await response.arrayBuffer();
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
@@ -64,11 +79,10 @@ export async function onRequest(context) {
         "Access-Control-Allow-Origin": "*",
       },
     });
-  } catch {
-    return next();
+  } catch (err) {
+    return new Response(`Internal Error trying to fetch file: ${err.message}\n${err.stack}`, {
+      status: 500,
+      headers: { "Content-Type": "text/plain" }
+    });
   }
 }
-
-
-
-
