@@ -227,6 +227,7 @@ export async function onRequest(context) {
                 let errBody = "unknown";
                 try { errBody = await ghRes.text(); } catch {}
                 return json({ success: false, error: errBody.slice(0, 500) }, ghRes.status);
+            }
             const result = await ghRes.json();
             return json({
                 success: true,
