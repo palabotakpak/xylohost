@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { scrollbar-width: thin; scrollbar-color: var(--border-color) var(--dark-iron); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark-iron); }
+  ::-webkit-scrollbar-thumb { background: var(--border-color); }
+  
+  body {
+    font-family: "Outfit", sans-serif;
+  }
+}
+
+/* ───── Theme override via data attribute ───── */
+
+/* Dark (default) */
+:root,
+[data-theme="dark"] {
+  --black: #000000;
+  --charcoal: #141414;
+  --dark-iron: #0D0D0D;
+  --border-color: #1A1A1A;
+  --white: #FFFFFF;
+  --smoke: #F5F5F5;
+  --ash: #888888;
+  --steel: #555555;
+  --iron: #333333;
+  --gold: #FFC000;
+  --gold-text: #FFCE3E;
+  --dark-gold: #917300;
+  --header-bg: rgba(0, 0, 0, 0.85);
+  --ghost-border: rgba(255, 255, 255, 0.4);
+  --ghost-hover-bg: rgba(255, 255, 255, 0.04);
+  --table-hover-bg: rgba(255, 255, 255, 0.02);
+  --dropzone-bg: #0D0D0D;
+  --dropzone-heading: #F5F5F5;
+}
+
+/* Light */
+[data-theme="light"] {
+  --black: #FFFFFF;
+  --charcoal: #F5F5F5;
+  --dark-iron: #FAFAFA;
+  --border-color: #E2E8F0;
+  --white: #000000;
+  --smoke: #141414;
+  --ash: #555555;
+  --steel: #777777;
+  --iron: #CCCCCC;
+  --gold: #FFC000;
+  --gold-text: #B48A00;
+  --dark-gold: #C08B00;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --ghost-border: rgba(0, 0, 0, 0.25);
+  --ghost-hover-bg: rgba(0, 0, 0, 0.04);
+  --table-hover-bg: rgba(0, 0, 0, 0.02);
+  --dropzone-bg: #000000;
+  --dropzone-heading: #000000;
+}
+
