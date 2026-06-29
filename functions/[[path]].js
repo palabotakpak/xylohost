@@ -32,7 +32,7 @@ export async function onRequest(context) {
   if (path.startsWith("f/")) path = path.slice(2);
 
   // Abaikan path internal
-  if (!path || path.startsWith("assets/") || path.startsWith("@") ||
+  if (!path || path.startsWith("assets/") || path.startsWith("@") || path.startsWith("api/") ||
       path === "favicon.svg" || path === "robots.txt" || path === "sitemap.xml" ||
       path === "icons.svg" || path === "sw.js" || path === "registerSW.js" || path === "manifest.webmanifest" || path.startsWith("workbox-")) {
     return next();
@@ -66,4 +66,5 @@ export async function onRequest(context) {
     return next();
   }
 }
+
 

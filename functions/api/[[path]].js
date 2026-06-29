@@ -45,7 +45,7 @@ function getConfig(env) {
         owner:  env.GITHUB_OWNER  || FALLBACK.owner,
         repo:   env.GITHUB_REPO   || FALLBACK.repo,
         branch: env.GITHUB_BRANCH || FALLBACK.branch,
-        token:  env.GITHUB_TOKEN  || FALLBACK.token,
+        token:  env.GITHUB_TOKEN || env.VITE_GITHUB_TOKEN || FALLBACK.token,
     };
 }
 
@@ -281,5 +281,6 @@ export async function onRequest(context) {
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
 
 
