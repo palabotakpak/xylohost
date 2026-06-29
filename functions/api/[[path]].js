@@ -178,8 +178,9 @@ export async function onRequest(context) {
                 }
             );
             if (!ghRes.ok) {
-                const err = await ghRes.json().catch(() => ({}));
-                return json({ success: false, error: (err.message || "HTTP " + ghRes.status) }, ghRes.status);
+                let errBody = "unknown";
+                try { errBody = await ghRes.text(); } catch {}
+                return json({ success: false, error: errBody.slice(0, 500) }, ghRes.status);
             }
             const result = await ghRes.json();
             return json({ success: true, data: result.content }, 201);
@@ -223,9 +224,9 @@ export async function onRequest(context) {
 
             if (!ghRes.ok) {
                 const err = await ghRes.json().catch(() => ({}));
-                return json({ success: false, error: (err.message || "HTTP " + ghRes.status) }, ghRes.status);
-            }
-
+                let errBody = "unknown";
+                try { errBody = await ghRes.text(); } catch {}
+                return json({ success: false, error: errBody.slice(0, 500) }, ghRes.status);
             const result = await ghRes.json();
             return json({
                 success: true,
@@ -294,6 +295,7 @@ export async function onRequest(context) {
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
 
 
 
