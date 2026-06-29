@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <script>
-      if (window.location.hostname === 'cdn.xyloapi.qzz.io') {
+      if (window.location.hostname === 'cdn.xyloapi.qzz.io' && !window.location.pathname.startsWith('/f/')) {
         window.location.replace('https://xylohost.pages.dev' + window.location.pathname + window.location.search);
       }
     </script>
