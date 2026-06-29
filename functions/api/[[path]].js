@@ -278,9 +278,24 @@ export async function onRequest(context) {
         }
     }
 
+
+    // ── GET /api/ping ── Diagnostic ─────────────────
+    if (method === "GET" && path === "ping") {
+        return json({
+            success: true,
+            data: {
+                ok: true,
+                hasToken: !!cfg.token,
+                owner: cfg.owner,
+                repo: cfg.repo,
+            },
+        });
+    }
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
+
 
 
 
