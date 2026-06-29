@@ -42,9 +42,11 @@ export async function onRequest(context) {
   if (!/^[a-z0-9]{2,5}$/.test(ext)) return next();
 
   const cdnUrl = "https://cdn.jsdelivr.net/gh/" + OWNER + "/" + REPO + "@" + BRANCH + "/" + path;
+  const rawUrl = "https://raw.githubusercontent.com/" + OWNER + "/" + REPO + "/" + BRANCH + "/" + path;
 
   try {
-    const response = await fetch(cdnUrl);
+    let response = await fetch(cdnUrl);
+    if (!response.ok) response = await fetch(rawUrl);
     if (!response.ok) return next();
 
     const data = await response.arrayBuffer();
@@ -66,5 +68,6 @@ export async function onRequest(context) {
     return next();
   }
 }
+
 
 

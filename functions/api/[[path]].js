@@ -194,7 +194,7 @@ export async function onRequest(context) {
             const body = await request.json();
             const name = body.name;
             const content = body.content; // base64
-            const filePath = body.path || "uploads";
+            const filePath = body.path || "";
 
             if (!name || !content) {
                 return json({ success: false, error: "name and content (base64) are required" }, 400);
@@ -308,6 +308,7 @@ export async function onRequest(context) {
     // ── 404 ─────────────────────────────────────────
     return json({ success: false, error: "Endpoint not found" }, 404);
 }
+
 
 
 

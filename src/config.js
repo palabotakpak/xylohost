@@ -9,9 +9,7 @@ const CONFIG = {
   proxy: {
     method: "cloudflare",
     baseUrl: typeof window !== "undefined"
-      ? window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? window.location.origin + "/f"
-        : window.location.origin
+      ? window.location.origin + "/f"
       : "",
   },
   site: {
@@ -23,4 +21,3 @@ const CONFIG = {
 };
 
 export default CONFIG;
-
