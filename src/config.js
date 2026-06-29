@@ -8,9 +8,7 @@ const CONFIG = {
   cdn: "jsdelivr",
   proxy: {
     method: "cloudflare",
-    baseUrl: typeof window !== "undefined"
-      ? window.location.origin + "/f"
-      : "",
+    baseUrl: "https://cdn.xyloapi.qzz.io/f",
   },
   site: {
     name: "XyloHost",
