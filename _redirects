@@ -1,2 +1,3 @@
-# SPA fallback
+# SPA fallback (Cloudflare Functions dijalankan lebih dulu, jadi /f/* dan /api/* aman)
 /*  /index.html  200
+
