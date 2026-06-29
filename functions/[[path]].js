@@ -45,8 +45,8 @@ export async function onRequest(context) {
   const rawUrl = "https://raw.githubusercontent.com/" + OWNER + "/" + REPO + "/" + BRANCH + "/" + path;
 
   try {
-    let response = await fetch(cdnUrl);
-    if (!response.ok) response = await fetch(rawUrl);
+    let response = await fetch(rawUrl);
+    if (!response.ok) response = await fetch(cdnUrl);
     if (!response.ok) return next();
 
     const data = await response.arrayBuffer();
@@ -68,6 +68,7 @@ export async function onRequest(context) {
     return next();
   }
 }
+
 
 
 
