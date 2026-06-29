@@ -34,7 +34,7 @@ export async function onRequest(context) {
   // Abaikan path internal
   if (!path || path.startsWith("assets/") || path.startsWith("@") ||
       path === "favicon.svg" || path === "robots.txt" || path === "sitemap.xml" ||
-      path === "icons.svg") {
+      path === "icons.svg" || path === "sw.js" || path === "registerSW.js" || path === "manifest.webmanifest" || path.startsWith("workbox-")) {
     return next();
   }
 
@@ -66,3 +66,4 @@ export async function onRequest(context) {
     return next();
   }
 }
+
